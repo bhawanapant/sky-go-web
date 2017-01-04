@@ -2,7 +2,6 @@ package homepage;
 
 
 import org.openqa.selenium.WebDriver;
-import cucumber.api.PendingException;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -14,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 public class HomepageSteps {
     WebDriver driver;
@@ -24,6 +24,14 @@ public class HomepageSteps {
     private WebElement carousel;
     public WebElement bannerid;
     private WebElement  bannerclose;
+    private WebElement herorowtitle;
+    private WebElement largeimage;
+    private WebElement smallimage;
+    private WebElement catchuptitle;
+    private WebElement skycinematitile;
+    private WebElement kidshighlight;
+    private WebElement skysportstitle;
+    private WebElement whatonnowtitle;
     private FirefoxProfile firebugProfile;
 
     @Given("^I am on homepage$")
@@ -50,50 +58,56 @@ public class HomepageSteps {
 
     @Then("^Large image highlight should be displayed$")
     public void largeImageHighlightShouldBeDisplayed() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
+        herorowtitle = driver.findElement(By.cssSelector("h1[class='ng-binding']"));
+        assertThat("Title is not as expected",herorowtitle.getText(),is("Sky Box Sets Highlights"));
 
+        largeimage = driver.findElement(By.xpath("//div[@class='row ng-scope slick-slide slick-current slick-active']//" +
+                "img[@class='img-responsive']"));
+        assertTrue("Image doesnot display", largeimage.isDisplayed());
+    }
     @And("^Small size highlight should be displayed$")
     public void smallSizeHighlightShouldBeDisplayed() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+       smallimage = driver.findElement(By.xpath("//div[@class='col-xs-3']" +
+               "//div[@class='pageItemWrapper']/img[@class='img-responsive']"));
+       assertTrue("Image doesnot display", smallimage.isDisplayed());
+
+
     }
 
     @Then("^Catch Up Highlights should be displayed$")
     public void catchUpHightlightsShouldBeDisplayed() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+       catchuptitle = driver.findElement(By.xpath("//slider[@class='ng-isolate-scope'][@vertical-tracking='4']" +
+               "/preceding-sibling::h1[@class='ng-binding']"));
+        assertThat("Title is not as expected",catchuptitle.getText(),is("Catch Up Highlights"));
+
     }
 
     @Then("^Sky Cinema Highlights should be displayed$")
     public void skyCinemaHighlightsShouldBeDisplayed() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
-    }
-
-    @Then("^Christmas showcase should be displayed$")
-    public void christmasShowcaseShouldBeDisplayed() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        skycinematitile = driver.findElement(By.cssSelector("div[class='row heroRow onNow ng-scope']>" +
+                "div[class='col-xs-12']>h1"));
+        assertThat("Title is not as expected",skycinematitile.getText(),is("What's On Now"));
     }
 
     @Then("^What's On Now should be displayed$")
     public void whatSOnNowShouldBeDisplayed() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        whatonnowtitle = driver.findElement(By.xpath("//slider[@class='ng-isolate-scope'][@vertical-tracking='5']" +
+                "/preceding-sibling::h1[@class='ng-binding']"));
+        assertThat("Title is not as expected",whatonnowtitle.getText(),is("Sky Cinema Highlights"));
     }
 
     @Then("^Kids Highlights showcase should be displayed$")
     public void kidsHighlightsShowcaseShouldBeDisplayed() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        kidshighlight = driver.findElement(By.xpath("//slider[@class='ng-isolate-scope'][@vertical-tracking='8']" +
+                "/preceding-sibling::h1[@class='ng-binding']"));
+        assertThat("Title is not as expected",kidshighlight.getText(),is("Kids Highlights"));
     }
 
     @Then("^Sky Sports Highlights should be displayed$")
     public void skySportsHighlightsShouldBeDisplayed() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+        skysportstitle = driver.findElement(By.xpath("//slider[@class='ng-isolate-scope'][@vertical-tracking='9']" +
+                "/preceding-sibling::h1[@class='ng-binding']"));
+        assertThat("Title is not as expected",skysportstitle.getText(),is("Kids Highlights"));
     }
 
     @Then("^four top picks images should be displayed$")
